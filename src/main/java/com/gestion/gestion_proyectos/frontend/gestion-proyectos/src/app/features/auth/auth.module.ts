@@ -1,23 +1,14 @@
-// src/app/features/auth/auth.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 
-const routes: Routes = [
-  {
-    path: 'login',
-    loadComponent: () => import('./pages/login/login.component')
-      .then(m => m.LoginComponent)
-  }
-];
+import { AuthRoutingModule } from './auth-routing.module';
+
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    RouterModule.forChild(routes)
+    AuthRoutingModule
   ]
 })
 export class AuthModule { }
