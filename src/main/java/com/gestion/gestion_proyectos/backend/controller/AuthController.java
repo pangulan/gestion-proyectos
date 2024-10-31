@@ -8,11 +8,8 @@ import com.gestion.gestion_proyectos.backend.service.AuthService;
 import com.gestion.gestion_proyectos.backend.dto.LoginRequest;
 import com.gestion.gestion_proyectos.backend.dto.AuthResponse;
 
-
-
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 public class AuthController{
 
     @Autowired
