@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 export interface User {
-  id?: number;
+  id: number;
   username: string;
   role: string;
 }
@@ -20,7 +20,7 @@ export interface AuthResponse {
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
-  public currentUser$ = this.currentUserSubject.asObservable();
+  currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient) {
     const user = localStorage.getItem('user');
@@ -46,11 +46,11 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
-  isAuthenticated(): boolean {
-    return !!this.currentUserSubject.value;
-  }
-
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.currentUserSubject.value;
   }
 }
