@@ -1,0 +1,37 @@
+$footer-bg-color: #264653;
+$link-hover-color-footer: #E76F51;
+
+.footer {
+  background-color: $footer-bg-color;
+  padding: 20px;
+  color: #FFFFFF;
+  text-align: center;
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .footer-links {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 10px;
+
+      a {
+        color: #FFFFFF;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $link-hover-color-footer;
+        }
+      }
+    }
+
+    &-copyright {
+      font-size: 0.8rem;
+      margin-top: 5px;
+    }
+  }
+}
