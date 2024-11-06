@@ -1,1 +1,32 @@
 <p>inicio works!</p>
+<section class="blur-background">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-md-6">
+                <div class="text-center mb-4">
+                    <img src="assets/inicio.jpg" alt="Logo" class="logo">
+                </div>
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1 class="fw-bold">Iniciar Sesión</h1>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
+                            <div class="form-group">
+                                <label for="correo">Correo</label>
+                                <input id="correo" formControlName="correo" class="form-control" type="email" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="contrasena">Contraseña</label>
+                                <input id="contrasena" formControlName="contrasena" class="form-control" type="password" required />
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-lg">Iniciar Sesión</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
