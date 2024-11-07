@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon'; // Asegúrate de importar MatIconModule
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { UsuarioModule } from './pages/usuario/usuario.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
     PagesModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    UsuarioModule,
     ReactiveFormsModule,
     MatIconModule,
     MatFormFieldModule,

@@ -7,4 +7,7 @@ import com.example.demo.Entity.Credencial;
 @Repository
 
 public interface CredencialRepository extends JpaRepository<Credencial, Long> {
+
+    Credencial findByUsernameAndPassword(String username, String password);
+
 }

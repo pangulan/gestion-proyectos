@@ -5,8 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../services/auth.service';
 
 interface Credenciales {
-  correo: string;
-  contrasena: string;
+  username: string;
+  password: string;
 }
 
 interface ResponseUser {
@@ -30,19 +30,19 @@ export class InicioComponent implements OnInit {
     private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
-      correo: ['', [Validators.required, Validators.email]],
-      contrasena: ['', [Validators.required, Validators.minLength(6)]]
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
   ngOnInit(): void {}
 
-  get correo() {
-    return this.loginForm.get('correo');
+  get username() {
+    return this.loginForm.get('username');
   }
 
-  get contrasena() {
-    return this.loginForm.get('contrasena');
+  get password() {
+    return this.loginForm.get('password');
   }
 
   iniciarSesion(): void {
@@ -52,33 +52,31 @@ export class InicioComponent implements OnInit {
     }
 
     const credenciales: Credenciales = {
-      correo: this.correo?.value,
-      contrasena: this.contrasena?.value
+      username: this.username?.value,
+      password: this.password?.value
     };
 
     this.isLoading = true;
 
-    this.authService.login(credenciales).subscribe(
-      (response: ResponseUser) => {
+    this.authService.login(credenciales).subscribe({
+      next: (response: ResponseUser) => {
         this.isLoading = false;
         this.authService.setUser(response);
         this.toastr.success(`Bienvenido, ${response.nombre}`, '¡Login Exitoso!');
         this.router.navigate(['/home']);
       },
-      (error) => this.manejarError(error)
-    );
+      error: (error) => this.manejarError(error)
+    });
   }
 
   private mostrarErrores(): void {
-    if (this.correo?.errors?.['required']) {
-      this.toastr.error('El correo es obligatorio.', '¡ERROR!');
-    } else if (this.correo?.errors?.['email']) {
-      this.toastr.error('Por favor, introduce un correo válido.', '¡ERROR!');
+    if (this.username?.errors?.['required']) {
+      this.toastr.error('El nombre de usuario es obligatorio.', '¡ERROR!');
     }
 
-    if (this.contrasena?.errors?.['required']) {
+    if (this.password?.errors?.['required']) {
       this.toastr.error('La contraseña es obligatoria.', '¡ERROR!');
-    } else if (this.contrasena?.errors?.['minlength']) {
+    } else if (this.password?.errors?.['minlength']) {
       this.toastr.error('La contraseña debe tener al menos 6 caracteres.', '¡ERROR!');
     }
   }

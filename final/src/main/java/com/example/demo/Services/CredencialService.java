@@ -14,5 +14,8 @@ public class CredencialService {
     public Credencial guardarCredencial(Credencial credencial) {
         return credencialRepository.save(credencial);
     }
-    // Métodos adicionales según sea necesario
+
+    public Credencial verificarCredenciales(String username, String password) {
+        return credencialRepository.findByUsernameAndPassword(username, password);
+    }
 }

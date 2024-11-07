@@ -10,6 +10,7 @@ registerLocaleData(LocaleEs);
 
 @NgModule({
   declarations: [
+    
 
   ],
   imports: [

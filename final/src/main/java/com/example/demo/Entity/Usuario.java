@@ -3,8 +3,6 @@ package com.example.demo.Entity;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +13,6 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
-@CrossOrigin(origins = "*")
 
 public class Usuario {
     @Id
@@ -27,9 +24,6 @@ public class Usuario {
     private String telefono;
     private String correoElectronico;
     private Date fechaContratacion;
-
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Credencial credencial;
 
     @ManyToMany(mappedBy = "empleados")
     private List<Tarea> tareas;
@@ -88,14 +82,6 @@ public class Usuario {
 
     public void setFechaContratacion(Date fechaContratacion) {
         this.fechaContratacion = fechaContratacion;
-    }
-
-    public Credencial getCredencial() {
-        return this.credencial;
-    }
-
-    public void setCredencial(Credencial credencial) {
-        this.credencial = credencial;
     }
 
     public List<Tarea> getTareas() {

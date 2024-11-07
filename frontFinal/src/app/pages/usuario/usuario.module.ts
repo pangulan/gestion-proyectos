@@ -6,10 +6,11 @@ import { MatCardModule } from '@angular/material/card'; // Asegúrate de importa
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { InicioComponent } from './inicio/inicio.component';
+import { UsuarioRoutingModule } from './usuario-routing.module';
 
 @NgModule({
   declarations: [
-    InicioComponent
+    InicioComponent,
   ],
   imports: [
     CommonModule,
@@ -17,7 +18,9 @@ import { InicioComponent } from './inicio/inicio.component';
     MatIconModule ,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    UsuarioRoutingModule
+
    ]
 })
 export class UsuarioModule { }
