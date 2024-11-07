@@ -7,14 +7,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {PagesModule} from "./pages/pages.module";
+import { PagesModule } from "./pages/pages.module";
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon'; // Asegúrate de importar MatIconModule
+import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UsuarioModule } from './pages/usuario/usuario.module';
+
+// Importar el módulo de documentos
+import { DocumentoModule } from './modules/documento/documento.module';
 
 @NgModule({
   declarations: [
@@ -22,12 +25,12 @@ import { UsuarioModule } from './pages/usuario/usuario.module';
     HeaderComponent,
     FooterComponent,
     HomeComponent
-  
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PagesModule,
+    DocumentoModule, // Añadimos el módulo de documentos
     HttpClientModule,
     BrowserAnimationsModule,
     UsuarioModule,
