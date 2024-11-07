@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,14 +22,18 @@ public class Documento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String codigo;
     private String descripcion;
     private String tipo;
-
+    
+    @Column(name = "ruta_archivo")
+    private String rutaArchivo;
+    
     @ManyToOne
     @JoinColumn(name = "tarea_id")
     private Tarea tarea;
-
+    
     @OneToMany(mappedBy = "documento")
     private List<Version> versiones;
 
@@ -79,4 +84,12 @@ public class Documento {
     public void setVersiones(List<Version> versiones) {
         this.versiones = versiones;
     }
+    public String getRutaArchivo() {
+        return rutaArchivo;
+    }
+
+    public void setRutaArchivo(String rutaArchivo) {
+        this.rutaArchivo = rutaArchivo;
+    }
+    
 }

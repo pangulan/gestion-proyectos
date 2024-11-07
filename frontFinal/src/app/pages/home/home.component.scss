@@ -19,7 +19,7 @@ $max-width: 900px;
     max-width: $max-width;
     margin-bottom: 30px;
     padding: 20px;
-    background-color: #ffffff; // Fondo blanco o neutro
+    background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 12px $shadow-color;
     text-align: left;
@@ -35,12 +35,12 @@ $max-width: 900px;
     .project-cards-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px; // Espacio entre cada tarjeta de proyecto
+      gap: 20px;
       margin-top: 20px;
     }
 
     .project-card {
-      background-color: #ffffff; // Fondo blanco o neutro
+      background-color: #ffffff;
       border: 1px solid $secondary-color;
       padding: 20px;
       border-radius: 8px;
@@ -73,7 +73,7 @@ $max-width: 900px;
       cursor: pointer;
       font-size: 1rem;
       transition: background-color 0.3s ease, transform 0.2s ease;
-      margin-top: 20px; // Espacio entre las tarjetas de proyecto y el botón "Ver Todos"
+      margin-top: 20px;
 
       &:hover {
         background-color: darken($button-color, 10%);
@@ -114,6 +114,81 @@ $max-width: 900px;
 
     p {
       font-size: 1.2rem;
+    }
+  }
+
+  // Nuevos estilos para la sección de documentos
+  .documents-overview {
+    .documents-container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+
+      // Estilos específicos para el componente documento-list
+      ::ng-deep {
+        .mat-card {
+          box-shadow: none !important;
+          padding: 0;
+        }
+
+        .mat-table {
+          background-color: transparent;
+        }
+
+        .mat-form-field {
+          width: 100%;
+        }
+
+        .file-input-container {
+          margin: 15px 0;
+        }
+      }
+    }
+
+    .btn-ver-todos {
+      display: block;
+      margin: 20px auto 0;
+      background-color: $button-color;
+      color: $text-color;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: darken($button-color, 10%);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// Media queries para responsividad
+@media (max-width: 768px) {
+  .home-container {
+    padding: 15px;
+
+    section {
+      padding: 15px;
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .welcome-section {
+      padding: 20px;
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .project-cards-container {
+      grid-template-columns: 1fr;
     }
   }
 }
