@@ -9,12 +9,13 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   private user: any;
   baseUrl = environment.urlClub;
-
   constructor(private httpClient: HttpClient) { }
 
   login(credenciales: any): Observable<any> {
     return this.httpClient.post<any>(`${this.baseUrl}credenciales/login`, credenciales);
+    
   }
+
 
   setUser(user: any): void {
     this.user = user;

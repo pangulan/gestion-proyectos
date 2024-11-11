@@ -83,12 +83,23 @@ export class InicioComponent implements OnInit {
 
   private manejarError(error: any): void {
     this.isLoading = false;
+
+    // Manejar diferentes tipos de errores HTTP
     let mensaje = 'Hubo un error al iniciar sesión. Intenta más tarde.';
-    if (error.status === 401) {
+    
+    if (error.status === 400) {
+      mensaje = 'Solicitud incorrecta. Revisa los datos e inténtalo de nuevo.';
+    } else if (error.status === 401) {
       mensaje = 'Credenciales incorrectas. Por favor, intenta nuevamente.';
     } else if (error.status === 403) {
       mensaje = 'Acceso prohibido. Tu cuenta puede estar desactivada.';
+    } else if (error.status === 500) {
+      mensaje = 'Error del servidor. Por favor, intenta más tarde.';
+    } else if (!error.status) {
+      mensaje = 'No se pudo conectar con el servidor. Verifica tu conexión a internet.';
     }
+
+    console.error('Error en el inicio de sesión:', error);
     this.toastr.error(mensaje, '¡ERROR!');
   }
 }

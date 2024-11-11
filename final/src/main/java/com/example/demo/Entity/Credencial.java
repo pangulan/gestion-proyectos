@@ -1,5 +1,8 @@
 package com.example.demo.Entity;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -12,6 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "credenciales")
+@CrossOrigin(origins = "*")
 
 public class Credencial {
     @Id
@@ -21,8 +25,8 @@ public class Credencial {
     private String password;
 
     @OneToOne
-    @JsonManagedReference
     @JoinColumn(name = "usuario_id")
+    @JsonBackReference
     private Usuario usuario;
 
     public Long getId() {
