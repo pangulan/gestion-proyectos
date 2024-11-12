@@ -63,7 +63,7 @@ export class InicioComponent implements OnInit {
         this.isLoading = false;
         this.authService.setUser(response);
         this.toastr.success(`Bienvenido, ${response.nombre}`, '¡Login Exitoso!');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/usuario/principal']);
       },
       error: (error) => this.manejarError(error)
     });

@@ -1,41 +1,54 @@
 <div class="home-container">
-    <section class="welcome-section">
-      <h1>Bienvenido a la Gestión de Proyectos</h1>
-      <p>Administra y controla los proyectos de tu empresa desde una única aplicación.</p>
-    </section>
-  
-    <section class="projects-overview">
-      <h2>Resumen de Proyectos</h2>
-      <div class="project-cards-container">
-        <div class="project-card" *ngFor="let project of projects">
-          <h3>{{ project.nombreClave }}</h3>
-          <p><strong>Denominación:</strong> {{ project.denominacion }}</p>
-          <p><strong>Fecha de Inicio:</strong> {{ project.fechaInicio | date }}</p>
-          <p><strong>Fecha de Fin:</strong> {{ project.fechaFin | date }}</p>
-          <p><strong>Estado:</strong> {{ project.estado }}</p>
-        </div>
-      </div>
-      <button routerLink="/projects" class="btn-primary">Ver Todos</button>
-    </section>
-  
-    <section class="tasks-overview">
-      <h2>Tareas Recientes</h2>
-      <ul>
-        <li *ngFor="let task of recentTasks">
-          <strong>{{ task.descripcion }}</strong> - {{ task.estado }} - {{ task.fechaInicio | date }}
-        </li>
-      </ul>
-    </section>
-  
-    <section class="documents-overview">
-      <h2>Documentos del Proyecto</h2>
-      <div class="documents-container">
-        <app-documento-list [tareaId]="selectedTaskId"></app-documento-list>
-      </div>
-      <div class="documents-actions">
-        <button routerLink="/documentos" class="btn-primary">
-          Ver Todos los Documentos
-        </button>
-      </div>
-    </section>
-  </div>
+  <!-- Título centrado -->
+  <h1 class="main-title">Bienvenido a GestorPro</h1>
+
+  <!-- Tarjeta de introducción -->
+  <section class="intro-card">
+    <p>La plataforma integral para la gestión eficiente de proyectos y recursos humanos en tu empresa.</p>
+  </section>
+
+  <!-- Sección de funcionalidades principales -->
+  <section class="features-section">
+
+    <div class="feature-card">
+      <i class="icon fas fa-folder"></i>
+      <h2>Registro de Proyectos</h2>
+      <p>Lleva un control detallado de cada proyecto de la empresa, incluyendo su nombre en clave, denominación, fechas y estado actual.</p>
+    </div>
+
+    <div class="feature-card">
+      <i class="icon fas fa-users"></i>
+      <h2>Gestión de Recursos Humanos</h2>
+      <p>Administra el personal de tu empresa y consulta la ficha completa de cada empleado, con datos de contacto y fecha de contratación.</p>
+    </div>
+
+    <div class="feature-card">
+      <i class="icon fas fa-user-tie"></i>
+      <h2>Coordinación de Proyectos</h2>
+      <p>Asigna coordinadores a cada proyecto y gestiona los responsables de cada tarea para un seguimiento efectivo.</p>
+    </div>
+
+    <div class="feature-card">
+      <i class="icon fas fa-tasks"></i>
+      <h2>Gestión de Tareas</h2>
+      <p>Organiza cada proyecto en tareas específicas, con fechas y duración estimada y real, para un control exhaustivo del avance.</p>
+    </div>
+
+    <div class="feature-card">
+      <i class="icon fas fa-file-alt"></i>
+      <h2>Documentación de Proyectos</h2>
+      <p>Genera y organiza documentos asociados a cada tarea, como especificaciones y código fuente, con un sistema de control de versiones.</p>
+    </div>
+
+    <div class="feature-card">
+      <i class="icon fas fa-sync-alt"></i>
+      <h2>Control de Versiones</h2>
+      <p>Almacena y consulta las distintas versiones de los documentos, incluyendo descripciones y fechas de cada actualización.</p>
+    </div>
+  </section>
+
+  <!-- Sección de botones de acción -->
+  <section class="auth-section">
+    <button class="btn-action" routerLink="/usuario/inicio">Iniciar Sesión</button>
+  </section>
+</div>

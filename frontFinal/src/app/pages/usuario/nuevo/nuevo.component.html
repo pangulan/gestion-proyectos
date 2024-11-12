@@ -1,0 +1,52 @@
+<div class="form-container">
+    <section class="form-section">
+      <h2>Agregar Nuevo Proyecto</h2>
+        
+        <!-- Campo de Nombre en Clave -->
+        <div class="form-group">
+          <label for="nombre_clave">Nombre en Clave</label>
+          <input id="nombre_clave" formControlName="nombre_clave" type="text" class="form-control" placeholder="Ej. Proyecto A" required />
+        </div>
+        
+        <!-- Campo de Denominación Comercial -->
+        <div class="form-group">
+          <label for="denominacion_comercial">Denominación Comercial</label>
+          <input id="denominacion_comercial" formControlName="denominacion_comercial" type="text" class="form-control" placeholder="Ej. Desarrollo de Software" required />
+        </div>
+        
+        <!-- Campo de Estado -->
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <select id="estado" formControlName="estado" class="form-control" required>
+            <option value="">Selecciona un estado</option>
+            <option value="En Proceso">En Proceso</option>
+            <option value="Completado">Completado</option>
+          </select>
+        </div>
+        
+        <!-- Campo de Fecha de Inicio -->
+        <div class="form-group">
+          <label for="fecha_inicio">Fecha de Inicio</label>
+          <input id="fecha_inicio" formControlName="fecha_inicio" type="date" class="form-control" required />
+        </div>
+        
+        <!-- Campo de Fecha de Fin -->
+        <div class="form-group">
+          <label for="fecha_fin">Fecha de Fin</label>
+          <input id="fecha_fin" formControlName="fecha_fin" type="date" class="form-control" required />
+        </div>
+        
+        <!-- Campo de Coordinador Identificación -->
+        <div class="form-group">
+          <label for="coordinador_identificacion">Coordinador Identificación</label>
+          <input id="coordinador_identificacion" formControlName="coordinador_identificacion" type="number" class="form-control" placeholder="Ej. 1" required />
+        </div>
+  
+        <!-- Botón de Enviar -->
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Guardar Proyecto</button>
+        </div>
+      
+    </section>
+  </div>
+  

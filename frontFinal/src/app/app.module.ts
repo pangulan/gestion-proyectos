@@ -30,7 +30,6 @@ import { DocumentoModule } from './modules/documento/documento.module';
     BrowserModule,
     AppRoutingModule,
     PagesModule,
-    DocumentoModule, // Añadimos el módulo de documentos
     HttpClientModule,
     BrowserAnimationsModule,
     UsuarioModule,

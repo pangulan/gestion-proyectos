@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from "./home/home.component";
+import { PrincipalComponent } from './usuario/principal/principal.component';
+import { NuevoComponent } from './usuario/nuevo/nuevo.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -8,7 +10,9 @@ const routes: Routes = [
   {
     path: 'usuario', children: [
       { path: 'inicio', loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule) },
-   
+      { path: 'principal', component: PrincipalComponent},
+      { path: 'nuevo', component: NuevoComponent},
+
     ]
   },
   { path: '**', redirectTo: 'home' }

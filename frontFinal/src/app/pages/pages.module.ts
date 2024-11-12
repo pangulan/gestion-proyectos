@@ -4,19 +4,22 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { PagesRoutingModule } from './pages-routing.module';
 import { registerLocaleData } from "@angular/common"
 import LocaleEs from "@angular/common/locales/es-CO";
+import { DocumentoModule } from '../modules/documento/documento.module';
+import { PrincipalComponent} from './usuario/principal/principal.component';
 registerLocaleData(LocaleEs);
+
 
 
 
 @NgModule({
   declarations: [
-    
-
+    PrincipalComponent
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DocumentoModule
   ],
   providers: [
     {
