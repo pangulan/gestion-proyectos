@@ -12,6 +12,8 @@ import { NuevoComponent } from './nuevo/nuevo.component';
 @NgModule({
   declarations: [
     InicioComponent,
+    NuevoComponent,
+    
   ],
   imports: [
     CommonModule,

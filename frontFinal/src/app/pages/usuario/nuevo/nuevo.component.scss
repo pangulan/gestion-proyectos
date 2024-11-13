@@ -1,76 +1,77 @@
 .form-container {
-    padding: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #F4F4F9; // Color de fondo general
-  
-    .form-section {
-      width: 100%;
-      max-width: 600px;
-      padding: 30px;
-      background-color: #ffffff; // Color de fondo del formulario
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); // Sombra suave
-  
-      h2 {
-        font-size: 1.8rem;
-        color: #264653; // Color del texto del título
-        margin-bottom: 20px;
-        text-align: center;
-        border-bottom: 2px solid #2A9D8F; // Línea inferior del título
-        padding-bottom: 10px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F4F4F9; // Color de fondo general
+
+  .form-section {
+    width: 100%;
+    max-width: 600px;
+    padding: 40px; // Aumentado para dar más espacio dentro de la tarjeta
+    background-color: #ffffff; // Color de fondo del formulario
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); // Sombra suave
+
+    h2 {
+      font-size: 1.8rem;
+      color: #264653; // Color del texto del título
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 2px solid #2A9D8F; // Línea inferior del título
+      padding-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      padding: 0 10px; // Espacio adicional alrededor de cada grupo de formulario
+
+      label {
+        font-size: 1rem;
+        color: #264653; // Color del texto de las etiquetas
+        font-weight: bold;
+        margin-bottom: 8px;
+        display: block;
       }
-  
-      .form-group {
-        margin-bottom: 20px;
-  
-        label {
-          font-size: 1rem;
-          color: #264653; // Color del texto de las etiquetas
-          font-weight: bold;
-          margin-bottom: 8px;
-          display: block;
-        }
-  
-        .form-control {
-          width: 100%;
-          padding: 12px;
-          font-size: 1rem;
-          border: 1px solid #B0BEC5; // Color del borde del input en estado normal
-          border-radius: 8px;
-          background-color: #F4F4F9; // Color de fondo de los inputs
-          color: #264653; // Color del texto en los inputs
-          outline: none;
-          transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  
-          &:focus {
-            border-color: #2A9D8F; // Color del borde en estado activo
-            box-shadow: 0 0 8px rgba(42, 157, 143, 0.5); // Efecto de sombra en el borde
-          }
+
+      .form-control {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        border: 1px solid #B0BEC5; // Color del borde del input en estado normal
+        border-radius: 8px;
+        background-color: #F4F4F9; // Color de fondo de los inputs
+        color: #264653; // Color del texto en los inputs
+        outline: none;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:focus {
+          border-color: #2A9D8F; // Color del borde en estado activo
+          box-shadow: 0 0 8px rgba(42, 157, 143, 0.5); // Efecto de sombra en el borde
         }
       }
-  
-      .form-actions {
-        text-align: center;
-        margin-top: 20px;
-  
-        .btn-primary {
-          background-color: #2A9D8F; // Color de fondo del botón
-          color: #FFFFFF; // Color del texto del botón
-          padding: 12px 25px;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 1rem;
-          transition: background-color 0.3s ease, transform 0.2s ease;
-          
-          &:hover {
-            background-color: darken(#2A9D8F, 10%); // Color del fondo del botón al pasar el ratón
-            transform: translateY(-2px);
-          }
+    }
+
+    .form-actions {
+      text-align: center;
+      margin-top: 20px;
+      padding: 0 10px; // Espacio adicional alrededor del botón
+
+      .btn-primary {
+        background-color: #2A9D8F; // Color de fondo del botón
+        color: #FFFFFF; // Color del texto del botón
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        
+        &:hover {
+          background-color: darken(#2A9D8F, 10%); // Color del fondo del botón al pasar el ratón
+          transform: translateY(-2px);
         }
       }
     }
   }
-  
+}

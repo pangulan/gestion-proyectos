@@ -16,9 +16,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { UsuarioModule } from './pages/usuario/usuario.module';
 
-// Importar el módulo de documentos
-import { DocumentoModule } from './modules/documento/documento.module';
-
 @NgModule({
   declarations: [
     AppComponent,
