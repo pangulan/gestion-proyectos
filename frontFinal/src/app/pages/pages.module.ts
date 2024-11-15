@@ -6,6 +6,7 @@ import { registerLocaleData } from "@angular/common"
 import LocaleEs from "@angular/common/locales/es-CO";
 import { DocumentoModule } from '../modules/documento/documento.module';
 import { PrincipalComponent} from './usuario/principal/principal.component';
+import { ListarComponent } from './usuario/listar/listar.component';
 registerLocaleData(LocaleEs);
 
 
@@ -13,7 +14,8 @@ registerLocaleData(LocaleEs);
 
 @NgModule({
   declarations: [
-    PrincipalComponent
+    PrincipalComponent,
+    
   ],
   imports: [
     CommonModule,

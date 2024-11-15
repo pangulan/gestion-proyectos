@@ -8,12 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { InicioComponent } from './inicio/inicio.component';
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { NuevoComponent } from './nuevo/nuevo.component';
+import { ListarComponent } from './listar/listar.component';
 
 @NgModule({
   declarations: [
     InicioComponent,
     NuevoComponent,
-    
+    ListarComponent
   ],
   imports: [
     CommonModule,

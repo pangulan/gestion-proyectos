@@ -4,6 +4,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { HomeComponent } from '../home/home.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { NuevoComponent } from './nuevo/nuevo.component';
+import { ListarComponent } from './listar/listar.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
       { path: 'inicio', component: InicioComponent},
       { path: 'principal', component: PrincipalComponent},
       { path: 'nuevo', component: NuevoComponent},
+      { path: 'listar', component: ListarComponent},
       { path: '**', redirectTo: 'inicio' },
     ]
   }

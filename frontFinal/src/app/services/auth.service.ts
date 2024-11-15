@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   private user: any;
-  baseUrl = environment.urlClub;
+  baseUrl = environment.urlProyecto;
   constructor(private httpClient: HttpClient) { }
 
   login(credenciales: any): Observable<any> {

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlClub: 'http://localhost:8080/api/',
+  urlProyecto: 'http://localhost:8080/api/',
 };
 
 /*

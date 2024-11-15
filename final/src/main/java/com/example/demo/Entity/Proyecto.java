@@ -29,9 +29,6 @@ public class Proyecto {
     @OneToOne
     private Usuario coordinador;
 
-    @OneToMany(mappedBy = "proyecto")
-    private List<Tarea> tareas;
-
     public Long getId() {
         return this.id;
     }
@@ -88,11 +85,4 @@ public class Proyecto {
         this.coordinador = coordinador;
     }
 
-    public List<Tarea> getTareas() {
-        return this.tareas;
-    }
-
-    public void setTareas(List<Tarea> tareas) {
-        this.tareas = tareas;
-    }
 }

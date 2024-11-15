@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,7 +18,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "usuarios")
 @CrossOrigin(origins = "*")
-
 public class Usuario {
     @Id
     @Column(name = "identificacion")
@@ -31,11 +30,8 @@ public class Usuario {
     private Date fechaContratacion;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnore
     private Credencial credencial;
-
-    @ManyToMany(mappedBy = "empleados")
-    private List<Tarea> tareas;
 
     public int getId() {
         return this.id;
@@ -99,13 +95,5 @@ public class Usuario {
 
     public void setCredencial(Credencial credencial) {
         this.credencial = credencial;
-    }
-
-    public List<Tarea> getTareas() {
-        return this.tareas;
-    }
-
-    public void setTareas(List<Tarea> tareas) {
-        this.tareas = tareas;
     }
 }
