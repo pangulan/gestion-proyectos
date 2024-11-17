@@ -50,8 +50,8 @@ public class DocumentoController {
             DocumentoDownloadDTO downloadDTO = documentoService.descargarDocumento(id);
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(downloadDTO.getContentType()))
-                    .header(HttpHeaders.CONTENT_DISPOSITION, 
-                           "attachment; filename=\"" + downloadDTO.getFileName() + "\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "attachment; filename=\"" + downloadDTO.getFileName() + "\"")
                     .body(downloadDTO.getResource());
         } catch (IOException e) {
             return ResponseEntity.notFound().build();

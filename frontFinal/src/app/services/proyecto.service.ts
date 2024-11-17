@@ -23,4 +23,8 @@ export class ProyectoService {
     return this.httpClient.get<any[]>(`${this.baseUrl}proyectos/listarProyectos`);
   }
 
+  getUsuarios(): Observable<any> {
+    return this.httpClient.get<any[]>(`${this.baseUrl}usuarios/todos`);
+  }
+
 }

@@ -86,44 +86,6 @@ export class DocumentoListComponent implements OnInit {
       });
   }
 
-  descargarDocumento(documento: Documento): void {
-    this.isLoading = true;
-    this.documentoService.descargarDocumento(documento.id)
-      .subscribe({
-        next: (blob: Blob) => {
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = documento.codigo || 'documento';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url);
-          this.isLoading = false;
-        },
-        error: (error: HttpErrorResponse) => {
-          console.error('Error al descargar documento:', error);
-          this.toastr.error('Error al descargar el documento');
-          this.isLoading = false;
-        }
-      });
-  }
-
-  eliminarDocumento(id: number): void {
-    if (confirm('¿Está seguro de que desea eliminar este documento?')) {
-      this.documentoService.eliminarDocumento(id).subscribe({
-        next: () => {
-          this.toastr.success('Documento eliminado exitosamente');
-          this.cargarDocumentos();
-        },
-        error: (error: HttpErrorResponse) => {
-          console.error('Error al eliminar documento:', error);
-          this.toastr.error('Error al eliminar el documento');
-        }
-      });
-    }
-  }
-
   private cargarDocumentos(): void {
     if (this.tareaId) {
       this.isLoading = true;

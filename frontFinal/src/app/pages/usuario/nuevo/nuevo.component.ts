@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'; // Angular Material S
 })
 export class NuevoComponent {
   proyectoForm: FormGroup;
+  usuarios: any[] = []
 
   constructor(
     private fb: FormBuilder,
@@ -24,6 +25,20 @@ export class NuevoComponent {
       fechaFin: ['', Validators.required],
       coordinadorIdentificacion: ['', [Validators.required, Validators.min(1)]],
     });
+  }
+  ngOnInit(): void {
+    this.cargarUsuarios(); // Cargar los usuarios al iniciar el componente
+  }
+  cargarUsuarios(): void {
+    this.proyectoService.getUsuarios().subscribe(
+      (response) => {
+        this.usuarios = response; // Asigna los usuarios obtenidos
+      },
+      (error) => {
+        console.error('Error al cargar usuarios:', error);
+        this.showSnackBar('Error al cargar los usuarios', 'error');
+      }
+    );
   }
 
   guardarProyecto(): void {
