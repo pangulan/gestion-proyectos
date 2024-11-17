@@ -14,7 +14,7 @@
           placeholder="Ingrese una descripción">
       </div>
 
-      <div class="file-input-group">
+      <div class="file-input-group"> 
         <label class="file-select-button" [class.has-file]="selectedFile">
           <span class="icon">📎</span>
           <span>{{ selectedFile ? selectedFile.name : 'Seleccionar archivo' }}</span>
@@ -34,41 +34,5 @@
         <span>{{ isLoading ? 'Subiendo...' : 'Subir documento' }}</span>
       </button>
     </form>
-  </div>
-
-  <div class="documents-list">
-    <h3>Documentos</h3>
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th>Descripción</th>
-            <th>Tipo</th>
-            <th>Fecha</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let documento of documentos">
-            <td>{{documento.codigo}}</td>
-            <td>{{documento.descripcion}}</td>
-            <td>{{documento.tipo}}</td>
-            <td>{{documento.fechaCreacion | date}}</td>
-            <td class="actions">
-              <button (click)="descargarDocumento(documento)" class="action-button download">
-                <span class="icon">⬇️</span>
-              </button>
-              <button (click)="eliminarDocumento(documento.id)" class="action-button delete">
-                <span class="icon">🗑️</span>
-              </button>
-            </td>
-          </tr>
-          <tr *ngIf="documentos.length === 0">
-            <td colspan="5" class="no-data">No hay documentos disponibles</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </div>

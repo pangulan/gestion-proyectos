@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentoService } from '../../../services/documento.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
   templateUrl: './principal.component.html',
   styleUrls: ['./principal.component.scss']
 })
+
+
 export class PrincipalComponent implements OnInit {
   projects = [
     {
@@ -32,32 +35,27 @@ export class PrincipalComponent implements OnInit {
 
   selectedTaskId: number | null = null; // ID de la tarea seleccionada
   documentos: any[] = []; // Almacena los documentos relacionados con la tarea seleccionada
+  isLoading: boolean = false; // Estado visual para procesos de carga
 
-  constructor(private documentoService: DocumentoService) {}
+  constructor(private documentoService: DocumentoService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    if (this.recentTasks.length > 0) {
-      this.selectedTaskId = this.recentTasks[0].id;
-      this.cargarDocumentos(this.selectedTaskId);
-    }
-  }
 
-  // Cargar documentos relacionados con una tarea específica
-  cargarDocumentos(tareaId: number): void {
-    this.documentoService.obtenerDocumentosPorTarea(tareaId).subscribe(
-      (response) => {
-        this.documentos = response;
-      },
-      (error) => {
-        console.error('Error al cargar documentos:', error);
-      }
-    );
   }
+ 
 
   // Subir un nuevo documento
   subirDocumento(event: any): void {
     const file = event.target.files[0];
     if (!file) {
+      this.snackBar.open('Por favor selecciona un archivo', 'Cerrar', { duration: 3000 });
+      return;
+    }
+
+    const allowedFormats = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'txt', 'jpg', 'png'];
+    const fileExtension = file.name.split('.').pop()?.toLowerCase();
+    if (!allowedFormats.includes(fileExtension!)) {
+      this.snackBar.open('Formato de archivo no permitido', 'Cerrar', { duration: 3000 });
       return;
     }
 
@@ -65,15 +63,20 @@ export class PrincipalComponent implements OnInit {
     formData.append('file', file);
     formData.append('tareaId', this.selectedTaskId!.toString());
 
+    this.isLoading = true;
     this.documentoService.subirDocumento(formData).subscribe(
       (response) => {
         console.log('Documento subido:', response);
-        this.cargarDocumentos(this.selectedTaskId!); // Refrescar la lista de documentos
+        this.snackBar.open('Documento subido exitosamente', 'Cerrar', { duration: 3000 });
+        this.isLoading = false;
       },
       (error) => {
         console.error('Error al subir documento:', error);
+        this.snackBar.open('Error al subir documento', 'Cerrar', { duration: 3000 });
+        this.isLoading = false;
       }
     );
   }
+
 
 }

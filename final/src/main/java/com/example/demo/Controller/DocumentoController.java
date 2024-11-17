@@ -2,11 +2,14 @@
 package com.example.demo.Controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,17 +33,35 @@ public class DocumentoController {
     private DocumentoService documentoService;
 
     @PostMapping("/upload")
-    public ResponseEntity<Documento> subirDocumento(
+    public ResponseEntity<Map<String, Object>> subirDocumento(
             @RequestParam("file") MultipartFile file,
-            @RequestParam("tareaId") Long tareaId,
             @RequestParam("descripcion") String descripcion,
             @RequestParam("tipo") String tipo,
             @RequestParam("codigo") String codigo) {
         try {
+            // Asignar tareaId a 1 por defecto
+            Long tareaId = 1L;
+
             Documento documento = documentoService.subirDocumento(file, tareaId, descripcion, tipo, codigo);
-            return ResponseEntity.ok(documento);
+
+            // Estructura de respuesta exitosa
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", documento.getId());
+            response.put("codigo", documento.getCodigo());
+            response.put("descripcion", documento.getDescripcion());
+            response.put("tipo", documento.getTipo());
+            response.put("rutaArchivo", documento.getRutaArchivo());
+            response.put("tareaId", documento.getTarea().getId());
+
+            return ResponseEntity.ok(response);
+
         } catch (IOException e) {
-            return ResponseEntity.internalServerError().build();
+            // Estructura de respuesta de error unificada
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error al procesar el archivo");
+            errorResponse.put("details", e.getMessage());
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 

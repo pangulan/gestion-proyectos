@@ -20,11 +20,23 @@ export class DocumentoService {
 
   constructor(private http: HttpClient) {}
 
-  subirDocumento(formData: FormData): Observable<Documento> {
-    return this.http.post<Documento>(`${this.baseUrl}/upload`, formData);
+  subirDocumento(formData: FormData): Observable<string> {
+    return this.http.post(`${this.baseUrl}/upload`, formData, { responseType: 'text' });
   }
 
   obtenerDocumentosPorTarea(tareaId: number): Observable<Documento[]> {
     return this.http.get<Documento[]>(`${this.baseUrl}/tarea/${tareaId}`);
   }
+
+  descargarDocumento(codigo: string): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/descargar/${codigo}`, {
+      responseType: 'blob'
+    });
+  }
+
+  eliminarDocumento(documentoId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${documentoId}`);
+  }
+
+
 }
