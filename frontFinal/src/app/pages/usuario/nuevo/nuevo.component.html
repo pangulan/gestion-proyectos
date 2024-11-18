@@ -1,76 +1,53 @@
 <div class="form-container">
-  <form [formGroup]="proyectoForm" (ngSubmit)="guardarProyecto()">
+  <div class="toggle-buttons">
+    <button mat-button [class.active]="mostrandoProyecto" (click)="mostrandoProyecto = true">
+      <mat-icon>work</mat-icon> Nuevo Proyecto
+    </button>
+    <button mat-button [class.active]="!mostrandoProyecto" (click)="mostrandoProyecto = false">
+      <mat-icon>person_add</mat-icon> Nuevo Usuario
+    </button>
+  </div>
+
+  <!-- Formulario de Proyecto (Existente) -->
+  <form *ngIf="mostrandoProyecto" [formGroup]="proyectoForm" (ngSubmit)="guardarProyecto()" class="project-form">
     <section class="form-section">
       <h2>Agregar Nuevo Proyecto</h2>
 
-      <!-- Campo de Nombre en Clave -->
       <div class="form-group">
         <label for="nombreClave">Nombre en Clave</label>
-        <input 
-          id="nombreClave" 
-          formControlName="nombreClave" 
-          type="text" 
-          class="form-control" 
-          placeholder="Ej. Proyecto A" 
-          required />
+        <input id="nombreClave" formControlName="nombreClave" type="text" class="form-control" 
+               placeholder="Ej. Proyecto A" required />
       </div>
 
-      <!-- Campo de Denominación Comercial -->
       <div class="form-group">
         <label for="denominacionComercial">Denominación Comercial</label>
-        <input 
-          id="denominacionComercial" 
-          formControlName="denominacionComercial" 
-          type="text" 
-          class="form-control" 
-          placeholder="Ej. Desarrollo de Software" 
-          required />
+        <input id="denominacionComercial" formControlName="denominacionComercial" type="text" 
+               class="form-control" placeholder="Ej. Desarrollo de Software" required />
       </div>
 
-      <!-- Campo de Estado -->
       <div class="form-group">
         <label for="estado">Estado</label>
-        <select 
-          id="estado" 
-          formControlName="estado" 
-          class="form-control" 
-          required>
+        <select id="estado" formControlName="estado" class="form-control" required>
           <option value="">Selecciona un estado</option>
           <option value="En Proceso">En Proceso</option>
           <option value="Completado">Completado</option>
         </select>
       </div>
 
-      <!-- Campo de Fecha de Inicio -->
       <div class="form-group">
         <label for="fechaInicio">Fecha de Inicio</label>
-        <input 
-          id="fechaInicio" 
-          formControlName="fechaInicio" 
-          type="date" 
-          class="form-control" 
-          required />
+        <input id="fechaInicio" formControlName="fechaInicio" type="date" class="form-control" required />
       </div>
 
-      <!-- Campo de Fecha de Fin -->
       <div class="form-group">
         <label for="fechaFin">Fecha de Fin</label>
-        <input 
-          id="fechaFin" 
-          formControlName="fechaFin" 
-          type="date" 
-          class="form-control" 
-          required />
+        <input id="fechaFin" formControlName="fechaFin" type="date" class="form-control" required />
       </div>
 
-      <!-- Campo de Coordinador Identificación -->
       <div class="form-group">
         <label for="coordinadorIdentificacion">Coordinador</label>
-        <select 
-          id="coordinadorIdentificacion" 
-          formControlName="coordinadorIdentificacion" 
-          class="form-control" 
-          required>
+        <select id="coordinadorIdentificacion" formControlName="coordinadorIdentificacion" 
+                class="form-control" required>
           <option value="">Selecciona un coordinador</option>
           <option *ngFor="let usuario of usuarios" [value]="usuario.id">
             {{ usuario.nombre }} {{ usuario.apellido }}
@@ -78,9 +55,67 @@
         </select>
       </div>
 
-      <!-- Botón de Enviar -->
       <div class="form-actions">
-        <button type="submit" class="btn-primary" [disabled]="!proyectoForm.valid">Guardar Proyecto</button>
+        <button type="submit" class="btn-primary" [disabled]="!proyectoForm.valid">
+          Guardar Proyecto
+        </button>
+        <button type="button" class="btn-secondary" routerLink="/usuario/listar">Cancelar</button>
+      </div>
+    </section>
+  </form>
+
+  <!-- Formulario de Usuario (Nuevo) -->
+  <form *ngIf="!mostrandoProyecto" [formGroup]="usuarioForm" (ngSubmit)="guardarUsuario()" class="user-form">
+    <section class="form-section">
+      <h2>Agregar Nuevo Usuario</h2>
+
+      <div class="form-group">
+        <label for="id">Identificación</label>
+        <input id="id" formControlName="id" type="text" class="form-control" 
+               placeholder="Número de identificación" required />
+      </div>
+
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" formControlName="nombre" type="text" class="form-control" 
+               placeholder="Nombre" required />
+      </div>
+
+      <div class="form-group">
+        <label for="apellido">Apellido</label>
+        <input id="apellido" formControlName="apellido" type="text" class="form-control" 
+               placeholder="Apellido" required />
+      </div>
+
+      <div class="form-group">
+        <label for="direccion">Dirección</label>
+        <input id="direccion" formControlName="direccion" type="text" class="form-control" 
+               placeholder="Dirección completa" required />
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input id="telefono" formControlName="telefono" type="tel" class="form-control" 
+               placeholder="Número de teléfono" required />
+      </div>
+
+      <div class="form-group">
+        <label for="correoElectronico">Correo Electrónico</label>
+        <input id="correoElectronico" formControlName="correoElectronico" type="email" 
+               class="form-control" placeholder="correo@ejemplo.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="fechaContratacion">Fecha de Contratación</label>
+        <input id="fechaContratacion" formControlName="fechaContratacion" type="date" 
+               class="form-control" required />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" [disabled]="!usuarioForm.valid">
+          Guardar Usuario
+        </button>
+        <button type="button" class="btn-secondary" routerLink="/usuario/listar">Cancelar</button>
       </div>
     </section>
   </form>

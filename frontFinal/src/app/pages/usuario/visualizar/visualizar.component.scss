@@ -1,39 +1,213 @@
 .visualizar-container {
-    max-width: 800px;
-    margin: 0 auto;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+
+  h2 {
+    color: #264653;
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2A9D8F;
+  }
+
+  h3 {
+    color: #264653;
+    margin: 20px 0 15px;
+  }
+
+  .loading-spinner {
+    text-align: center;
+    padding: 40px;
+    
+    p {
+      margin-top: 15px;
+      color: #666;
+    }
+  }
+
+  .info-card {
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      
+      .info-item {
+        strong {
+          display: block;
+          color: #264653;
+          margin-bottom: 5px;
+        }
+        span {
+          color: #2A9D8F;
+        }
+      }
+    }
+  }
+
+  .table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #264653;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f8f9fa;
+      }
+
+      tr:hover {
+        background-color: #e9ecef;
+      }
+
+      .action-button {
+        padding: 8px 12px;
+        margin-right: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &.download {
+          background-color: #2A9D8F;
+          color: white;
+
+          &:hover {
+            background-color: darken(#2A9D8F, 10%);
+          }
+        }
+
+        &.view {
+          background-color: #264653;
+          color: white;
+
+          &:hover {
+            background-color: darken(#264653, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  .estado-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    
+    &.estado-completada {
+      background-color: #4CAF50;
+      color: white;
+    }
+    
+    &.estado-en-proceso {
+      background-color: #2196F3;
+      color: white;
+    }
+    
+    &.estado-pendiente {
+      background-color: #FFC107;
+      color: black;
+    }
+  }
+
+  .tarea-card, .proyecto-card {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+    .tarea-header, .proyecto-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+
+      h4 {
+        margin: 0;
+        color: #264653;
+      }
+    }
+
+    .tarea-details, .proyecto-details {
+      p {
+        margin: 5px 0;
+        color: #666;
+
+        strong {
+          color: #264653;
+        }
+      }
+    }
+  }
+
+  .documentos-section {
+    .documentos-table {
+      width: 100%;
+
+      .acciones {
+        white-space: nowrap;
+        
+        button {
+          margin: 0 3px;
+        }
+      }
+    }
+  }
+
+  .no-data {
+    text-align: center;
     padding: 20px;
-  
+    color: #666;
+    background: #f8f9fa;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+
+  .error-message {
+    text-align: center;
+    padding: 40px;
+    color: #dc3545;
+    
+    mat-icon {
+      font-size: 48px;
+      height: 48px;
+      width: 48px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+// Media queries para responsividad
+@media (max-width: 768px) {
+  .visualizar-container {
+    padding: 10px;
+
+    .info-card .info-grid {
+      grid-template-columns: 1fr;
+    }
+
     .table-container {
-      margin-top: 20px;
-  
+      overflow-x: auto;
+      
       table {
-        width: 100%;
-        border-collapse: collapse;
-  
-        th, td {
-          padding: 10px;
-          text-align: left;
-          border: 1px solid #ddd;
-        }
-  
-        th {
-          background-color: #f4f4f4;
-        }
-  
-        .action-button {
-            padding: 8px 12px;
-            margin-right: 8px;
-            cursor: pointer;
-          }
-          
-          .action-button.download {
-            background-color: #4CAF50;
-            color: white;
-          }
-          
-          .action-button.view {
-            background-color: #2196F3;
-            color: white;
-          }
-          
-        }}}
+        min-width: 600px;
+      }
+    }
+  }
+}

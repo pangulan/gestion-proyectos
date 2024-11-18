@@ -32,7 +32,7 @@ public class DocumentoService {
     @Autowired
     private TareaRepository tareaRepository;
 
-    private final Path rootPath = Paths.get("uploads");
+    private final Path rootPath = Paths.get("final/uploads");
 
     public Documento subirDocumento(MultipartFile file, Long tareaId, String descripcion,
             String tipo, String codigo) throws IOException {

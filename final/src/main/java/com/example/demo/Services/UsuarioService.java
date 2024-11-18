@@ -1,6 +1,7 @@
 package com.example.demo.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,17 @@ public class UsuarioService {
 
     public List<Usuario> obtenerTodos() {
         return usuarioRepository.findAll();
+    }
+
+    public Optional<Usuario> obtenerPorId(Integer id) {
+        return usuarioRepository.findById(id);
+    }
+
+    public void eliminarUsuario(Integer id) {
+        usuarioRepository.deleteById(id);
+    }
+
+    public boolean existeUsuario(Integer id) {
+        return usuarioRepository.existsById(id);
     }
 }

@@ -1,36 +1,152 @@
 .list-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-  
-    h2 {
-      text-align: center;
-      color: #2a9d8f;
-      margin-bottom: 20px;
-    }
-  
-    .project-table {
-      width: 100%;
-      border-collapse: collapse;
-  
-      th, td {
-        padding: 12px;
-        text-align: left;
-        border: 1px solid #ddd;
+  padding: 20px;
+  max-width: 1200px; // Aumentado para acomodar ambas tablas
+  margin: 0 auto;
+
+  .toggle-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+    
+    button {
+      margin: 0 10px;
+      padding: 8px 16px;
+      background-color: #264653;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &.active {
+        background-color: #2a9d8f;
       }
-  
-      th {
-        background-color: #264653;
-        color: #ffffff;
-      }
-  
-      tr:nth-child(even) {
-        background-color: #f4f4f9;
-      }
-  
-      tr:hover {
-        background-color: #e9f7f2;
+
+      mat-icon {
+        vertical-align: middle;
+        margin-right: 5px;
       }
     }
   }
+
+  h2 {
+    text-align: center;
+    color: #2a9d8f;
+    margin-bottom: 20px;
+  }
+
+  .table-actions {
+    margin-bottom: 20px;
+    text-align: right;
+
+    button {
+      background-color: #2a9d8f;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+
+      mat-icon {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .project-table,
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #264653;
+      color: #ffffff;
+      font-weight: normal;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f4f4f9;
+    }
+
+    tr:hover {
+      background-color: #e9f7f2;
+    }
+
+    .actions-column {
+      width: 100px;
+      text-align: center;
+      white-space: nowrap;
+
+      button {
+        margin: 0 3px;
+        padding: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        mat-icon {
+          font-size: 20px;
+
+          &.edit {
+            color: #2a9d8f;
+          }
+
+          &.delete {
+            color: #e76f51;
+          }
+        }
+      }
+    }
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    background: #f4f4f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 20px;
+  }
+}
+
+// Estilos para los botones de Material
+.mat-icon-button {
+  &.mat-primary {
+    color: #2a9d8f;
+  }
   
+  &.mat-warn {
+    color: #e76f51;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 1200px) {
+  .list-container {
+    padding: 10px;
+    
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+}
+
+// Animaciones
+.toggle-buttons button, 
+.table-actions button {
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: darken(#2a9d8f, 10%);
+  }
+}
