@@ -1,0 +1,11 @@
+{
+    "properties": [
+      {
+        "name": "app.upload.dir",
+        "type": "java.lang.String",
+        "description": "Directorio donde se almacenarán los archivos cargados por la aplicación.",
+        "defaultValue": "uploads"
+      }
+    ]
+  }
+  

@@ -1,0 +1,36 @@
+<div class="visualizar-container">
+    <h2>Visualizar Documentos</h2>
+    <div *ngIf="isLoading" class="loading">Cargando documentos...</div>
+  
+    <div *ngIf="!isLoading && documentos.length > 0" class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descripción</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let documento of documentos">
+            <td>{{ documento.codigo }}</td>
+            <td>{{ documento.descripcion }}</td>
+            <td>{{ documento.tipo }}</td>
+            <td>
+              <button (click)="descargarDocumento(documento)" class="action-button download">
+                Descargar
+              </button>
+              <button (click)="visualizarDocumento(documento)" class="action-button view">
+                Visualizar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="!isLoading && documentos.length === 0" class="no-data">
+      No hay documentos disponibles.
+    </div>
+</div>

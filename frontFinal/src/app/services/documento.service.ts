@@ -28,8 +28,8 @@ export class DocumentoService {
     return this.http.get<Documento[]>(`${this.baseUrl}/tarea/${tareaId}`);
   }
 
-  descargarDocumento(codigo: string): Observable<Blob> {
-    return this.http.get(`${this.baseUrl}/descargar/${codigo}`, {
+  descargarDocumento(id: string): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/descargar/${id}`, {
       responseType: 'blob'
     });
   }
@@ -37,6 +37,15 @@ export class DocumentoService {
   eliminarDocumento(documentoId: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${documentoId}`);
   }
+  obtenerTodosLosDocumentos(): Observable<Documento[]> {
+    return this.http.get<Documento[]>(`${this.baseUrl}/todos`);
+  
+  }
 
+  verDocumento(id: string): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/ver/${id}`, {
+      responseType: 'blob'
+    });
+  }
 
 }

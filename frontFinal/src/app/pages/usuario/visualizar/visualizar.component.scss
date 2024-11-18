@@ -1,0 +1,39 @@
+.visualizar-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  
+    .table-container {
+      margin-top: 20px;
+  
+      table {
+        width: 100%;
+        border-collapse: collapse;
+  
+        th, td {
+          padding: 10px;
+          text-align: left;
+          border: 1px solid #ddd;
+        }
+  
+        th {
+          background-color: #f4f4f4;
+        }
+  
+        .action-button {
+            padding: 8px 12px;
+            margin-right: 8px;
+            cursor: pointer;
+          }
+          
+          .action-button.download {
+            background-color: #4CAF50;
+            color: white;
+          }
+          
+          .action-button.view {
+            background-color: #2196F3;
+            color: white;
+          }
+          
+        }}}

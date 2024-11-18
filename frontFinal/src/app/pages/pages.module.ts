@@ -7,15 +7,12 @@ import LocaleEs from "@angular/common/locales/es-CO";
 import { DocumentoModule } from '../modules/documento/documento.module';
 import { PrincipalComponent} from './usuario/principal/principal.component';
 import { ListarComponent } from './usuario/listar/listar.component';
+import { VisualizarComponent } from './usuario/visualizar/visualizar.component';
 registerLocaleData(LocaleEs);
-
-
-
 
 @NgModule({
   declarations: [
-    PrincipalComponent,
-    
+    PrincipalComponent,    
   ],
   imports: [
     CommonModule,

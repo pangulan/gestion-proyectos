@@ -1,4 +1,3 @@
-// src/main/java/com/example/demo/dto/DocumentoDownloadDTO.java
 package com.example.demo.dto;
 
 import org.springframework.core.io.Resource;

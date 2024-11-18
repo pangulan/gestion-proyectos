@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,18 +24,19 @@ public class Documento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String codigo;
     private String descripcion;
     private String tipo;
-    
+
     @Column(name = "ruta_archivo")
     private String rutaArchivo;
-    
+
     @ManyToOne
     @JoinColumn(name = "tarea_id")
+    @JsonManagedReference
     private Tarea tarea;
-    
+
     @OneToMany(mappedBy = "documento")
     private List<Version> versiones;
 
@@ -84,6 +87,7 @@ public class Documento {
     public void setVersiones(List<Version> versiones) {
         this.versiones = versiones;
     }
+
     public String getRutaArchivo() {
         return rutaArchivo;
     }
@@ -91,5 +95,5 @@ public class Documento {
     public void setRutaArchivo(String rutaArchivo) {
         this.rutaArchivo = rutaArchivo;
     }
-    
+
 }

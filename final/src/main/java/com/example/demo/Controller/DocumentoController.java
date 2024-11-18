@@ -1,13 +1,17 @@
-// src/main/java/com/example/demo/Controller/DocumentoController.java
 package com.example.demo.Controller;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,14 +27,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Entity.Documento;
 import com.example.demo.Services.DocumentoService;
-import com.example.demo.dto.DocumentoDownloadDTO;
+import com.example.demo.dto.DocumentoDTO;
 
 @RestController
 @RequestMapping("/api/documentos")
 @CrossOrigin(origins = "*")
 public class DocumentoController {
+
     @Autowired
     private DocumentoService documentoService;
+
+    private final Path rootPath = Paths.get("C:/Users/USUARIO/OneDrive/ARES/gestion-proyectos/final/uploads");
 
     @PostMapping("/upload")
     public ResponseEntity<Map<String, Object>> subirDocumento(
@@ -39,12 +46,10 @@ public class DocumentoController {
             @RequestParam("tipo") String tipo,
             @RequestParam("codigo") String codigo) {
         try {
-            // Asignar tareaId a 1 por defecto
             Long tareaId = 1L;
 
             Documento documento = documentoService.subirDocumento(file, tareaId, descripcion, tipo, codigo);
 
-            // Estructura de respuesta exitosa
             Map<String, Object> response = new HashMap<>();
             response.put("id", documento.getId());
             response.put("codigo", documento.getCodigo());
@@ -54,33 +59,94 @@ public class DocumentoController {
             response.put("tareaId", documento.getTarea().getId());
 
             return ResponseEntity.ok(response);
-
         } catch (IOException e) {
-            // Estructura de respuesta de error unificada
             Map<String, Object> errorResponse = new HashMap<>();
             errorResponse.put("message", "Error al procesar el archivo");
             errorResponse.put("details", e.getMessage());
-
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        } catch (Exception e) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error interno");
+            errorResponse.put("details", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
-    @GetMapping("/{id}/download")
-    public ResponseEntity<Resource> descargarDocumento(@PathVariable Long id) {
+    @GetMapping("/descargar/{codigo}")
+    public ResponseEntity<?> descargarDocumentoPorCodigo(@PathVariable("codigo") String codigo) {
         try {
-            DocumentoDownloadDTO downloadDTO = documentoService.descargarDocumento(id);
+            Documento documento = documentoService.obtenerDocumentoPorCodigo(codigo);
+
+            Path filePath = Paths.get(documento.getRutaArchivo()).normalize();
+            if (!Files.exists(filePath) || !Files.isReadable(filePath)) {
+                throw new RuntimeException("El archivo no existe o no se puede leer: " + filePath);
+            }
+
+            Resource resource = new UrlResource(filePath.toUri());
+            String contentDisposition = "attachment; filename=\"" + documento.getDescripcion() + "\"";
+
             return ResponseEntity.ok()
-                    .contentType(MediaType.parseMediaType(downloadDTO.getContentType()))
-                    .header(HttpHeaders.CONTENT_DISPOSITION,
-                            "attachment; filename=\"" + downloadDTO.getFileName() + "\"")
-                    .body(downloadDTO.getResource());
-        } catch (IOException e) {
-            return ResponseEntity.notFound().build();
+                    .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
+                    .contentType(MediaType.parseMediaType(documento.getTipo()))
+                    .body(resource);
+        } catch (RuntimeException e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error al descargar el archivo: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error inesperado al procesar la solicitud");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 
-    @GetMapping("/tarea/{tareaId}")
-    public ResponseEntity<List<Documento>> obtenerDocumentosPorTarea(@PathVariable Long tareaId) {
-        return ResponseEntity.ok(documentoService.obtenerDocumentosPorTarea(tareaId));
+    @GetMapping("/todos")
+    public ResponseEntity<List<DocumentoDTO>> obtenerTodosLosDocumentos() {
+        try {
+            List<DocumentoDTO> documentos = documentoService.obtenerTodosLosDocumentos()
+                    .stream()
+                    .map(DocumentoDTO::new)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(documentos);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null);
+        }
     }
+
+    @GetMapping("/ver/{codigo}")
+    public ResponseEntity<?> visualizarDocumentoPorCodigo(@PathVariable("codigo") String codigo) {
+        try {
+            // Buscar documento por código
+            Documento documento = documentoService.obtenerDocumentoPorCodigo(codigo);
+
+            // Obtener la ruta del archivo
+            Path filePath = Paths.get(documento.getRutaArchivo()).normalize();
+            if (!Files.exists(filePath) || !Files.isReadable(filePath)) {
+                throw new RuntimeException("El archivo no existe o no se puede leer: " + filePath);
+            }
+
+            // Crear el recurso a partir de la ruta del archivo
+            Resource resource = new UrlResource(filePath.toUri());
+
+            // Configurar encabezado para visualizar inline
+            String contentDisposition = "inline; filename=\"" + documento.getDescripcion() + "\"";
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
+                    .contentType(MediaType.parseMediaType(documento.getTipo()))
+                    .body(resource);
+
+        } catch (RuntimeException e) {
+            // Manejo de errores específicos
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error al visualizar el archivo: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        } catch (Exception e) {
+            // Manejo de errores generales
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Error inesperado al procesar la solicitud");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+
 }

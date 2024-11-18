@@ -9,15 +9,19 @@ import { InicioComponent } from './inicio/inicio.component';
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { NuevoComponent } from './nuevo/nuevo.component';
 import { ListarComponent } from './listar/listar.component';
+import { VisualizarComponent } from './visualizar/visualizar.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     InicioComponent,
     NuevoComponent,
-    ListarComponent
+    ListarComponent,
+    VisualizarComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     ReactiveFormsModule,
     MatIconModule ,
     MatFormFieldModule,
