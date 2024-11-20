@@ -37,7 +37,7 @@ public class DocumentoController {
     @Autowired
     private DocumentoService documentoService;
 
-    private final Path rootPath = Paths.get("D:\\gestion-proyectos\\final\\uploads");
+    private final Path rootPath = Paths.get("C:/Users/USUARIO/OneDrive/ARES/gestion-proyectos/final/uploads");
 
     @PostMapping("/upload")
     public ResponseEntity<Map<String, Object>> subirDocumento(

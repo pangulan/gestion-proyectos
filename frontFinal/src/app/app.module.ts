@@ -29,7 +29,6 @@ import { UsuarioModule } from './pages/usuario/usuario.module';
     PagesModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    UsuarioModule,
     ReactiveFormsModule,
     MatIconModule,
     MatFormFieldModule,

@@ -105,7 +105,6 @@ public class DocumentoService {
                 throw new IOException("No se pudo crear el directorio: " + filePath.getParent(), e);
             }
         }
-
         // Verificar si el archivo existe y es legible
         if (!Files.exists(filePath) || !Files.isReadable(filePath)) {
             throw new IOException("No se puede leer el archivo en la ruta especificada: " + filePath);

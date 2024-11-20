@@ -1,142 +1,36 @@
 <div class="visualizar-container">
-  <div *ngIf="isLoading" class="loading">
-    <div class="spinner"></div>
-    <p>Cargando información...</p>
+  <h2>Visualizar Documentos</h2>
+  <div *ngIf="isLoading" class="loading">Cargando documentos...</div>
+
+  <div *ngIf="!isLoading && documentos.length > 0" class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descripción</th>
+          <th>Tipo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let documento of documentos">
+          <td>{{ documento.codigo }}</td>
+          <td>{{ documento.descripcion }}</td>
+          <td>{{ documento.tipo }}</td>
+          <td>
+            <button (click)="descargarDocumento(documento)" class="action-button download">
+              Descargar
+            </button>
+            <button (click)="visualizarDocumento(documento)" class="action-button view">
+              Visualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <!-- Visualización de Proyecto -->
-  <div *ngIf="!isLoading && tipoVisualizacion === 'proyecto' && proyecto" class="content-section">
-    <h2>Detalles del Proyecto</h2>
-    
-    <div class="info-card">
-      <div class="info-grid">
-        <div class="info-item">
-          <strong>Nombre Clave:</strong>
-          <span>{{ proyecto.nombreClave }}</span>
-        </div>
-        <div class="info-item">
-          <strong>Denominación Comercial:</strong>
-          <span>{{ proyecto.denominacionComercial }}</span>
-        </div>
-        <div class="info-item">
-          <strong>Estado:</strong>
-          <span [class]="'estado-badge ' + getEstadoClass(proyecto.estado)">
-            {{ proyecto.estado }}
-          </span>
-        </div>
-        <div class="info-item">
-          <strong>Fecha Inicio:</strong>
-          <span>{{ proyecto.fechaInicio | date:'dd/MM/yyyy' }}</span>
-        </div>
-        <div class="info-item">
-          <strong>Fecha Fin:</strong>
-          <span>{{ proyecto.fechaFin | date:'dd/MM/yyyy' }}</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Documentos del Proyecto -->
-    <section class="documentos-section">
-      <h3>Documentos del Proyecto</h3>
-      <div class="table-container">
-        <table *ngIf="documentos.length > 0">
-          <thead>
-            <tr>
-              <th>Código</th>
-              <th>Descripción</th>
-              <th>Tipo</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let documento of documentos">
-              <td>{{ documento.codigo }}</td>
-              <td>{{ documento.descripcion }}</td>
-              <td>{{ documento.tipo }}</td>
-              <td>
-                <button class="action-button view" (click)="visualizarDocumento(documento)">
-                  Visualizar
-                </button>
-                <button class="action-button download" (click)="descargarDocumento(documento)">
-                  Descargar
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <p *ngIf="documentos.length === 0" class="no-data">No hay documentos disponibles</p>
-      </div>
-    </section>
-  </div>
-
-  <!-- Visualización de Usuario -->
-  <div *ngIf="!isLoading && tipoVisualizacion === 'usuario' && usuario" class="content-section">
-    <h2>Detalles del Usuario</h2>
-
-    <div class="info-card">
-      <div class="info-grid">
-        <div class="info-item">
-          <strong>Identificación:</strong>
-          <span>{{ usuario.id }}</span>
-        </div>
-        <div class="info-item">
-          <strong>Nombre:</strong>
-          <span>{{ usuario.nombre }} {{ usuario.apellido }}</span>
-        </div>
-        <div class="info-item">
-          <strong>Correo Electrónico:</strong>
-          <span>{{ usuario.correoElectronico }}</span>
-        </div>
-        <div class="info-item">
-          <strong>Teléfono:</strong>
-          <span>{{ usuario.telefono }}</span>
-        </div>
-        <div class="info-item">
-          <strong>Dirección:</strong>
-          <span>{{ usuario.direccion }}</span>
-        </div>
-        <div class="info-item">
-          <strong>Fecha Contratación:</strong>
-          <span>{{ usuario.fechaContratacion | date:'dd/MM/yyyy' }}</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Proyectos del Usuario -->
-    <section class="proyectos-section" *ngIf="proyectosUsuario.length > 0">
-      <h3>Proyectos Asignados</h3>
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre Clave</th>
-              <th>Denominación</th>
-              <th>Estado</th>
-              <th>Fecha Inicio</th>
-              <th>Fecha Fin</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let proyecto of proyectosUsuario">
-              <td>{{ proyecto.nombreClave }}</td>
-              <td>{{ proyecto.denominacionComercial }}</td>
-              <td>
-                <span [class]="'estado-badge ' + getEstadoClass(proyecto.estado)">
-                  {{ proyecto.estado }}
-                </span>
-              </td>
-              <td>{{ proyecto.fechaInicio | date:'dd/MM/yyyy' }}</td>
-              <td>{{ proyecto.fechaFin | date:'dd/MM/yyyy' }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-    <p *ngIf="proyectosUsuario.length === 0" class="no-data">No hay proyectos asignados</p>
-  </div>
-
-  <!-- Mensaje de error si no se encuentra la información -->
-  <div *ngIf="!isLoading && !proyecto && !usuario" class="error-message">
-    <p>No se encontró la información solicitada</p>
+  <div *ngIf="!isLoading && documentos.length === 0" class="no-data">
+    No hay documentos disponibles.
   </div>
 </div>
